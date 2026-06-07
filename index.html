@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>ATB Quarter Checker</title>
+  <style>
+    body {
+      background: #222;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 80px;
+    }
+    input {
+      padding: 10px;
+      width: 260px;
+      border-radius: 6px;
+      border: none;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 20px;
+      margin-left: 10px;
+      border: none;
+      border-radius: 6px;
+      background: #4caf50;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #result {
+      margin-top: 30px;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>ATB Quarter Checker</h1>
+  <input id="quarterInput" placeholder="Enter ATB name...">
+  <button onclick="checkQuarter()">Check</button>
+
+  <div id="result"></div>
+
+  <script>
+    async function checkQuarter() {
+      const name = document.getElementById("quarterInput").value.trim();
+
+      if (!name) {
+        document.getElementById("result").innerText = "Type something first.";
+        return;
+      }
+
+      const url = "https://script.google.com/macros/s/AKfycbz_t4O9wpPvVlSOsyS_ri8d8OysagTU_-7v6Bv7bq6e3_-46hZkR5yi8NsyQkfYRc7DXA/exec?quarter=" + encodeURIComponent(name);
+
+      const res = await fetch(url);
+      const text = await res.text();
+
+      document.getElementById("result").innerText = text;
+    }
+  </script>
+
+</body>
+</html>
